@@ -140,7 +140,11 @@ func javaHandler() {
 		JarFileName:         fileName,
 		AdditionalArguments: additionalCLIArgs,
 	}
-	template.GenerateDockerFiles()
+	err = template.GenerateDockerFiles()
+	if err != nil {
+		fmt.Println(fmt.Sprintf("%s", err))
+		os.Exit(0)
+	}
 }
 
 func golangHandler() {
@@ -188,7 +192,11 @@ func golangHandler() {
 			ExecutableName:      fileName,
 			AdditionalArguments: additionalCLIArgs,
 		}
-		template.GenerateDockerFiles()
+		err = template.GenerateDockerFiles()
+		if err != nil {
+			fmt.Println(fmt.Sprintf("%s", err))
+			os.Exit(0)
+		}
 		break
 	case "Source code":
 		text := ""
@@ -228,7 +236,11 @@ func golangHandler() {
 			Dependencies:        dependenciesString,
 			AdditionalArguments: additionalCLIArgs,
 		}
-		template.GenerateDockerFiles()
+		err = template.GenerateDockerFiles()
+		if err != nil {
+			fmt.Println(fmt.Sprintf("%s", err))
+			os.Exit(0)
+		}
 		break
 	}
 }
@@ -252,7 +264,11 @@ func nodeJsHandler() {
 	template := NodeJSBindingTemplate{
 		ProjectPath: projectPath,
 	}
-	template.GenerateDockerFiles()
+	err = template.GenerateDockerFiles()
+	if err != nil {
+		fmt.Println(fmt.Sprintf("%s", err))
+		os.Exit(0)
+	}
 }
 
 func generateKubernetesYamlFile() {
@@ -296,7 +312,11 @@ func generateKubernetesYamlFile() {
 		PodCount:           PodCount,
 		ImageName:          ImageName,
 	}
-	template.GenerateYamlFile()
+	err := template.GenerateYamlFile()
+	if err != nil {
+		fmt.Println(fmt.Sprintf("%s", err))
+		os.Exit(0)
+	}
 }
 
 func exit() {
